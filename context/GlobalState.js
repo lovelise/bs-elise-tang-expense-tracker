@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import axios from "axios";
+import Firebase from "../config/Firebase";
 
 //initial state
 const initialState = {
@@ -23,12 +24,22 @@ export const GlobalProvider = ({ children }) => {
   }
 
   function addTransaction(transaction) {
-    axios
-      .post("https://money-db-839d1.firebaseio.com/expense.json", {
-        transaction,
-      })
-      .then((res) => console.log("data wrote"))
-      .catch((e) => console.log(e));
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        axios
+          .post(
+            "https://money-db-839d1.firebaseio.com/user/" +
+              user.uid +
+              "/expense.json",
+            {
+              transaction,
+            }
+          )
+          .then((res) => console.log("data wrote"))
+          .catch((e) => console.log(e));
+      }
+    });
+
     dispatch({
       type: "ADD_TRANSACTION",
       payload: transaction,
@@ -37,19 +48,28 @@ export const GlobalProvider = ({ children }) => {
 
   function getTransaction() {
     let newTransaticon = [];
-    axios
-      .get("https://money-db-839d1.firebaseio.com/expense.json")
-      .then((response) => {
-        for (let key in response.data) {
-          newTransaticon.push(response.data[key].transaction);
-        }
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log();
+        axios
+          .get(
+            "https://money-db-839d1.firebaseio.com/user/" +
+              user.uid +
+              "/expense.json"
+          )
+          .then((response) => {
+            for (let key in response.data) {
+              newTransaticon.push(response.data[key].transaction);
+            }
 
-        dispatch({
-          type: "GET_TRANSACTION",
-          payload: newTransaticon,
-        });
-      })
-      .catch((e) => console.log("request cannot be completed: ", e));
+            dispatch({
+              type: "GET_TRANSACTION",
+              payload: newTransaticon,
+            });
+          })
+          .catch((e) => console.log("request cannot be completed: ", e));
+      }
+    });
   }
 
   return (

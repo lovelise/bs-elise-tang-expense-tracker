@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { SafeAreaView } from "react-native";
-import Main from "./components/Main";
+import SwitchNavigation from "./navigation/SwitchNavigator";
 
 export default function App() {
   return (
     <SafeAreaView>
-      <Main />
+      <SwitchNavigation />
     </SafeAreaView>
   );
 }
