@@ -7,7 +7,6 @@ const Summary = () => {
   const { transactions } = useContext(GlobalContext);
   const { getTransaction } = useContext(GlobalContext);
 
-
   useEffect(() => getTransaction(), []);
 
   const amounts = transactions.map((amounts) => amounts.amount);
@@ -26,46 +25,44 @@ const Summary = () => {
 
   return (
     <>
-      {/* {title View} */}
-      <View style={styles.header}>
-        <Text>Expense Tracker</Text>
-      </View>
-      {/* {balance view} */}
       <View style={styles.balance}>
-        <Text style={styles.balanceText}>Balance: ${balance} </Text>
+        <Text style={styles.balanceText}>Total Balance: ${balance} </Text>
       </View>
-      <View>
-        <Text style={styles.balanceText}>Total Income: ${totalIncome}</Text>
+      <View style={styles.income}>
+        <Text style={styles.incomeText}>Total Income: ${totalIncome}</Text>
       </View>
-      {/* {Income total and Expense total  view} */}
-      <View style={styles.expenseView}>
-        {/* {Expense Total View} */}
-
-        <Text style={styles.expenseText}>Total Expense ${totalExpense}</Text>
+      <View style={styles.expense}>
+        <Text style={styles.expenseText}>Total Expense: ${totalExpense}</Text>
       </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  balance: {
+    marginTop: -30,
   },
-
-  balance: {},
   balanceText: {
     color: "green",
     marginBottom: 10,
+    fontSize: 20,
+    // fontFamily:'Bangers_400Regular'
   },
-  expenseView: {
+  income: {
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  incomeText: {
+    fontSize: 16,
+  },
+  expense: {
     flexDirection: "row",
     color: "red",
   },
-  expenseText: { color: "red", marginBottom: 20 },
-  incomeView: {
-    marginRight: 40,
+  expenseText: {
+    color: "red",
+    fontSize: 16,
+    marginBottom: 10,
   },
 });
 

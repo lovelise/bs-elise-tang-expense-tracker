@@ -17,10 +17,18 @@ export const GlobalProvider = ({ children }) => {
 
   // Actions
   function deleteTransaction(id) {
-    dispatch({
-      type: "DELETE_TRANSACTION",
-      payload: id,
-    });
+    Firebase.auth.onAuthStateChanged((user) => {
+      if (user) {
+        axios.delete("https://money-db-839d1.firebaseio.com/user/" + user.uid +  "expense.json",);
+        console.log("user uid", user.uid)
+      }
+    }).then(
+      dispatch({
+        type: "DELETE_TRANSACTION",
+        payload: id,
+      })
+    );
+
   }
 
   function addTransaction(transaction) {
@@ -59,7 +67,7 @@ export const GlobalProvider = ({ children }) => {
           )
           .then((response) => {
             for (let key in response.data) {
-              newTransaticon.push(response.data[key].transaction);
+              key, newTransaticon.push(response.data[key].transaction);
             }
 
             dispatch({

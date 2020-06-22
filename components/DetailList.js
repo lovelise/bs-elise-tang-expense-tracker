@@ -1,32 +1,50 @@
-import React, { useContext,useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, Text, FlatList, View } from "react-native";
 import { GlobalContext } from "../context/GlobalState";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
 
 const DetailList = () => {
   const { transactions } = useContext(GlobalContext);
   const { getTransaction } = useContext(GlobalContext);
+  const {deleteTransaction} = useContext(GlobalContext);
 
-  useEffect(() =>{getTransaction()},[]);
- 
+  
+
+  useEffect(() => {
+    getTransaction();
+  }, []);
 
   return (
     <>
       <View style={styles.listView}>
-        <Text>Details History</Text>
+        <Text style={styles.title}>Details History</Text>
         <FlatList
           style={styles.flatList}
           keyExtractor={(item, index) => item.id}
           data={transactions}
           renderItem={(itemData) => (
-            <View style={styles.listItem}>
-              <Text>
+            <TouchableOpacity style={styles.listItem}>
+              <Text
+                style={
+                  itemData.item.amount < 0
+                    ? styles.amountRed
+                    : styles.amountGreen
+                }
+              >
                 {itemData.item.name}
-                <Text>
-                  {itemData.item.amount < 0 ? "-" : "+"}$
-                  {Math.abs(itemData.item.amount)}
-                </Text>
               </Text>
-            </View>
+              <Text
+                style={
+                  itemData.item.amount < 0
+                    ? styles.amountRed
+                    : styles.amountGreen
+                }
+              >
+                {itemData.item.amount < 0 ? "-" : "+"}$
+                {Math.abs(itemData.item.amount)}
+              </Text>
+            </TouchableOpacity>
           )}
         />
       </View>
@@ -35,15 +53,31 @@ const DetailList = () => {
 };
 
 const styles = StyleSheet.create({
+  title: {
+    color: "#8459cc",
+    marginBottom: 10,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
   listItem: {
     padding: 10,
     backgroundColor: "#ccc",
     borderColor: "black",
     borderWidth: 1,
+    marginBottom: 20,
+    backgroundColor: "#e8dae9",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   flatList: {
     height: "60%",
     borderWidth: 1,
+  },
+  amountRed: {
+    color: "red",
+  },
+  amountGreen: {
+    color: "green",
   },
 });
 
