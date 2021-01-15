@@ -96,7 +96,7 @@ const AddTransationModal = (props) => {
             <View style={styles.btnContainer}>
               <Button title="ADD" onPress={onsubmit} style={styles.sumbitBtn} />
               <Button
-                title="CANCLE"
+                title="CANCEL"
                 color="red"
                 onPress={props.cancel}
                 style={styles.cancleBtn}

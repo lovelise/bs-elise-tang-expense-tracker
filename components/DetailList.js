@@ -3,14 +3,11 @@ import { StyleSheet, Text, FlatList, View } from "react-native";
 import { GlobalContext } from "../context/GlobalState";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
 const DetailList = () => {
   const { transactions } = useContext(GlobalContext);
   const { getTransaction } = useContext(GlobalContext);
-  const {deleteTransaction} = useContext(GlobalContext);
-
+  const { deleteTransaction } = useContext(GlobalContext);
   
-
   useEffect(() => {
     getTransaction();
   }, []);

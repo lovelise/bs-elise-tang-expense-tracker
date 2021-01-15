@@ -38,11 +38,11 @@ export default function Login({ navigation }) {
 
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => navigation.navigate("Header"))
+      .then(() => {
+        navigation.navigate("Main");
+      })
       .catch((error) => {
-        if (error) {
-          Alert.alert("user not exist");
-        }
+        console.log(error);
       });
   };
 

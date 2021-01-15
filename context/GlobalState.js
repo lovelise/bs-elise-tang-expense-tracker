@@ -17,18 +17,10 @@ export const GlobalProvider = ({ children }) => {
 
   // Actions
   function deleteTransaction(id) {
-    Firebase.auth.onAuthStateChanged((user) => {
-      if (user) {
-        axios.delete("https://money-db-839d1.firebaseio.com/user/" + user.uid +  "expense.json",);
-        console.log("user uid", user.uid)
-      }
-    }).then(
-      dispatch({
-        type: "DELETE_TRANSACTION",
-        payload: id,
-      })
-    );
-
+    dispatch({
+      type: "DELETE_TRANSACTION",
+      payload: id,
+    });
   }
 
   function addTransaction(transaction) {
@@ -57,8 +49,8 @@ export const GlobalProvider = ({ children }) => {
   function getTransaction() {
     let newTransaticon = [];
     Firebase.auth().onAuthStateChanged((user) => {
+      console.log("get user ", user);
       if (user) {
-        console.log();
         axios
           .get(
             "https://money-db-839d1.firebaseio.com/user/" +

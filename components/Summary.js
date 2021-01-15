@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GlobalContext } from "../context/GlobalState";
 
-
 const Summary = () => {
   const { transactions } = useContext(GlobalContext);
   const { getTransaction } = useContext(GlobalContext);
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
     color: "green",
     marginBottom: 10,
     fontSize: 20,
-    // fontFamily:'Bangers_400Regular'
   },
   income: {
     marginTop: 10,

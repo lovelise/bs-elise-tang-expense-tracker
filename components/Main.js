@@ -1,37 +1,34 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text,TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Summary from "./Summary";
 import DetailList from "./DetailList";
 import AddTransationModal from "./AddTransationModal";
 import { GlobalProvider } from "../context/GlobalState";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function Header() {
+export default function Main() {
   const [isOn, setIsOn] = useState(false);
   const cancelModel = () => {
     setIsOn(false);
   };
   return (
     <GlobalProvider>
-      
       <View style={styles.screen}>
-      <LinearGradient
-        colors={["rgba(226,194,223,0.8)", "transparent"]}
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: 0,
-          height: 400,
-        }}
-      />
+        <LinearGradient
+          colors={["rgba(226,194,223,0.8)", "transparent"]}
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            height: 400,
+          }}
+        />
         <Summary />
         <TouchableOpacity style={styles.addModal}>
-
-          <Text
-            style={styles.btn}
-            onPress={() => setIsOn(true)}
-          >Add New Transation</Text>
+          <Text style={styles.btn} onPress={() => setIsOn(true)}>
+            Add New Transaction
+          </Text>
         </TouchableOpacity>
 
         <AddTransationModal visible={isOn} cancel={cancelModel} />
@@ -46,7 +43,7 @@ const styles = StyleSheet.create({
     padding: 50,
   },
   addModal: {
-    marginLeft:20,
+    marginLeft: 20,
     marginTop: 20,
     marginBottom: 20,
     paddingVertical: 5,
@@ -58,6 +55,6 @@ const styles = StyleSheet.create({
     width: 200,
   },
   btn: {
-      color: "#341b5e"
+    color: "#341b5e",
   },
 });

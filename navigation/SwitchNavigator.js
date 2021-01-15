@@ -1,10 +1,9 @@
 import React from "react";
-import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
-import Header from "../components/Main";
+import Main from "../components/Main";
 
 const Stack = createStackNavigator();
 
@@ -18,8 +17,8 @@ function MystackNavigation() {
           options={{ title: "                    Expense Tracker" }}
         />
         <Stack.Screen
-          name="Header"
-          component={Header}
+          name="Main"
+          component={Main}
           options={{ title: "Expense Tracker" }}
         />
         <Stack.Screen

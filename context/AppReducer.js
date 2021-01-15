@@ -19,6 +19,6 @@ export default (state, action) => {
         transactions: action.payload,
       };
     default:
-      return state;
+      return { ...state };
   }
 };

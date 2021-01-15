@@ -21,32 +21,29 @@ export default function Signup({ navigation }) {
     const isTrue = re.test(email);
     if (isTrue !== true) {
       setEmailIsValid(false);
-      
-    }else{
-      setEmailIsValid(true)
+    } else {
+      setEmailIsValid(true);
     }
 
-    setEmail(email)
+    setEmail(email);
   };
 
   const handleSignUp = () => {
-  
     if (!emailIsValid) {
       Alert.alert("please entry valid email");
       return;
-    }
-    else if(password !== comfrimedPassword){
+    } else if (password !== comfrimedPassword) {
       Alert.alert("please check you password");
       return;
     }
     Firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        Alert.alert("Welcome! Account Created. Back to Login.");
-        navigation.navigate("Welcome");
+        Alert.alert("Welcome! Account Created.");
+        navigation.navigate("Main");
       })
       .catch((error) => {
-        Alert.alert("error: ",error);
+        console.log(error);
         navigation.navigate("Welcome");
       });
   };
